@@ -28,3 +28,12 @@ The [kompose install pages](https://kompose.io/installation/) describe what to d
 ### Helm installation ###
 
 There are a variety of methods, although doing manually from the binary releases as described on the [helm install docs](https://helm.sh/docs/intro/install/) is fairly straightforward.
+
+## Available contents ##
+
+Each folder contains a simple README.md that describes how to get the code running.
+- __services__ : contains a Python app that can be built in a conda environment, or in a docker container
+- __k8s__ : contains kubernetes manifests for kubernetes deployment
+- __helm__ : contains a helm chart for kubernetes deployment
+
+There is also an over-arching [tutorial](Tutorial.md) that references each of those README.mds.
