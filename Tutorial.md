@@ -61,8 +61,14 @@ This may seem like a lot of boiler plate and expansion over the original docker-
 - The 'deployment' can handle how, on a config or image change, a new pod is spun up to replace the old pod, and handle the old pod if the new pod fails (this gives service resilience to users)
 - The 'ingress' (which is really just Nginx) can cover external connections, TLS termination, routing etc
 
-Also worth noting is that with Minikube (as with all Kubernetes), the only operations required to host and orchestrate an app, are
+Also worth noting, which reflects the PaaS nature, is that with Kubernetes, the only operations required to host and orchestrate an app, are
 - Providing a docker image
 - Providing manifests to say how to orchestrate that image
 
 There is nothing about the underlying hardware or VMs involved. The docker image (as a dockerfile) and the manifests (as yaml files) can be entirely handled as code (fitting in with an Infrastructure-as-Code, IaC, paradigm).
+
+Precisely how all the machinery in Kubernetes can be exposed as manifests is a massive topic. The typical things to remember/artefacts that crop up are that:
+- Kubernetes handles multiple pods, where each pod can run multiple containers. These are typically described by a Deployment or DeploymentConfig.
+- In-pod networking between containers in the same pod is completely open.
+- Inter-pod networking is handled by a Kubernetes Service.
+- Networking out of the Kubernetes cluster is handled by an Ingress or Route attaching onto a Service.

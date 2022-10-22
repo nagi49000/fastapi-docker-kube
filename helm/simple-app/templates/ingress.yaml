@@ -1,17 +1,21 @@
+{{- if .Values.ingress.enabled -}}
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fastapi-web-ingress
+  name: {{ $fullName }}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
     - http:
         paths:
-          - path: /(.*)
+          - path: {{ .Values.ingress.prefixpath }}/(.*)
             pathType: Prefix
             backend:
               service:
-                name: web
+                name: {{ include "simple-app.fullname" . }}
                 port:
-                  number: 8080
+                  number: {{ .Values.service.port }}
+...
+{{- end }}

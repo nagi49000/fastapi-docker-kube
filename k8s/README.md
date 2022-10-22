@@ -48,4 +48,12 @@ If all is well, the deployment will have spawned pods, the service will be linke
 curl $(minikube ip)/hello_world
 ```
 
+The manifests can be removed from Minikube by
+```
+# in fastapi-docker-kube/k8s/
+kubectl delete -f web-deployment.yaml
+kubectl delete -f web-service.yaml
+kubectl delete -f web-ingress.yaml
+```
+
 should return `{"message":"Hello World"}`. The IP returned by `$(minikube ip)` can be put into the web browser and now used as an http address on port 80 for exploring the app, in the same way that http://localhost:8080 could be used in the pure docker example in services.

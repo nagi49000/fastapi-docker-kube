@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import datetime
 import logging
+import os
 from pydantic import BaseModel
 
 
@@ -40,7 +41,8 @@ def get_gunicorn_logger(name="gunicorn.error"):
 
 def create_app(logger_name="gunicorn.error"):
     logger = get_gunicorn_logger(name=logger_name)
-    app = FastAPI(title="simple test app")
+    root_path = os.getenv("ROOT_PATH", None)
+    app = FastAPI(title="simple test app", root_path=root_path)
 
     @app.get("/hello_world", response_model=HelloWorldResponse)
     async def hello_world():
