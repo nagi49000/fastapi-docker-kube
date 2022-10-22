@@ -43,10 +43,17 @@ kubectl get events
 ```
 
 If all is well, the deployment will have spawned pods, the service will be linked up to the pod, and the ingress linked up to the service. In which case,
-
 ```
 curl $(minikube ip)/hello_world
 ```
+should return `{"message":"Hello World"}`. The IP returned by `$(minikube ip)` can be put into the web browser and now used as an http address on port 80 for exploring the app, in the same way that http://localhost:8080 could be used in the pure docker example in services.
+
+In the same way that a running docker container can be explored for logs, or exec-ed into, so can a Kubernetes pod, e.g.
+```
+kubectl logs <pod name>
+kubectl exec -it <pod name> -- bash
+```
+
 
 The manifests can be removed from Minikube by
 ```
@@ -55,5 +62,3 @@ kubectl delete -f web-deployment.yaml
 kubectl delete -f web-service.yaml
 kubectl delete -f web-ingress.yaml
 ```
-
-should return `{"message":"Hello World"}`. The IP returned by `$(minikube ip)` can be put into the web browser and now used as an http address on port 80 for exploring the app, in the same way that http://localhost:8080 could be used in the pure docker example in services.
