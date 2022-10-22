@@ -1,0 +1,6 @@
+FROM continuumio/miniconda3:latest
+
+WORKDIR /app
+COPY api ./
+RUN conda env update --file environment-test.yml --name base --prune && \
+    python -m pytest --cov=./api
