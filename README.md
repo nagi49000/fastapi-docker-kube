@@ -24,3 +24,7 @@ The [minikube](https://minikube.sigs.k8s.io/docs/start/) install instructions ar
 ### Kompose installation ###
 
 The [kompose install pages](https://kompose.io/installation/) describe what to do.
+
+### Helm installation ###
+
+There are a variety of methods, although doing manually from the binary releases as described on the [helm install docs](https://helm.sh/docs/intro/install/) is fairly straightforward.

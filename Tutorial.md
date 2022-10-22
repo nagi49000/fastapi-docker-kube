@@ -42,10 +42,27 @@ Kubernetes (K8S) is the classic example of a PaaS, although other examples do ex
 
 The [Kubernetes docs](https://kubernetes.io/docs/home/) are pretty detailed and well polished. They cover a lot in a digestible manner, although do sweep a number of devils-int-the-detail under the rug.
 
-Kubernetes hides away many of the direct-docker and IaaS worries. On pushing an image to Kubernetes, one can tell Kubernetes what to do with that image by supplying various yamls that describe the infrastructure that Kubernetes should serve. These yamls are _declarative_ and not _imperative_. This means that (unlike the IaaS case), one can tell Kubernetes what one would like (or to be updated), and Kubernetes works out the steps to perform to make that happen.
+Kubernetes hides away many of the direct-docker and IaaS worries. On pushing an image to Kubernetes, one can tell Kubernetes what to do with that image by supplying various yaml files (called 'manifests') that describe the infrastructure that Kubernetes should serve. These manifests are _declarative_ and not _imperative_. This means that (unlike the IaaS case), one can tell Kubernetes what one would like (or to be updated), and Kubernetes works out the steps to perform to make that happen.
 
 ### Minikube
 
 Minikube is a flavour of Kubernetes well suited for tutorial purposes. It is a simple, single node, instance of kubernetes. Note, that is not production grade. If one wishes to look at single node simple instances of kubernetes, and manage that single node cluster in production, then Rancher/K3S is a production ready flavour of Kubernetes.
 
 There is a simple nuts-and-bolts guide to setting up the fastapi app on Minikube in [k8s](k8s/README.md).
+
+For pedagogy (note, this usually generates fairly poor manifests), one can see the link from docker to kubernetes using the command line tool `kompose`. The deployment and service yamls in [k8s](k8s) were generated from running `kompose` on the [docker-compose.yaml](services/docker-compose.yaml). In this sense, the manifest files contain as much information as the docker-compose.yaml for running a docker container. The reader should look over the docker-compose.yaml, and see how how it compares to the manifest files, noting that
+- k8s/web-deployment.yaml describes how to stand up a container that uses a specified image with open ports
+- k8s/web-service.yaml describes how to forward ports from that container WITHIN the kubernetes cluster/network
+- k8s/web-ingress.yaml describes how to expose that service OUTSIDE the kubernetes network/cluster
+
+This may seem like a lot of boiler plate and expansion over the original docker-compose.yaml, but it offers a substantial amount of flexibility and resilience over a service stood up using docker or podman.
+- The 'deployment' (treated as immortal) acts as a template that spawns 'pods' (which are ephemeral). If a pod dies, it is cleared down and another pod launched from the deployment.
+- The 'service' (treated as immortal) can link to any pods with the relevant selector, permitting 'horizontal scaling'; the same service can sit in front of multiple pods from the same deployment.
+- The 'deployment' can handle how, on a config or image change, a new pod is spun up to replace the old pod, and handle the old pod if the new pod fails (this gives service resilience to users)
+- The 'ingress' (which is really just Nginx) can cover external connections, TLS termination, routing etc
+
+Also worth noting is that with Minikube (as with all Kubernetes), the only operations required to host and orchestrate an app, are
+- Providing a docker image
+- Providing manifests to say how to orchestrate that image
+
+There is nothing about the underlying hardware or VMs involved. The docker image (as a dockerfile) and the manifests (as yaml files) can be entirely handled as code (fitting in with an Infrastructure-as-Code, IaC, paradigm).
