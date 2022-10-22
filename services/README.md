@@ -1,5 +1,5 @@
-# fastapi_play
-a repo for playing with FastAPI and Docker
+# A simple fastapi service
+This is a service for playing with FastAPI and Docker
 
 ### FastAPI app ###
 
