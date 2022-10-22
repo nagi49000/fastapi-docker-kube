@@ -61,4 +61,4 @@ podman run -p 6780:6780 fastapi-docker-kube-prod:latest
 Once the app is running, one can interact directly with the endpoints. As for all FastAPI apps, there are docs available on the endpoints
 *  /openapi.json
 *  /docs
-*  /redoc
+*  /redocvirtual
