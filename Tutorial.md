@@ -47,3 +47,5 @@ Kubernetes hides away many of the direct-docker and IaaS worries. On pushing an 
 ### Minikube
 
 Minikube is a flavour of Kubernetes well suited for tutorial purposes. It is a simple, single node, instance of kubernetes. Note, that is not production grade. If one wishes to look at single node simple instances of kubernetes, and manage that single node cluster in production, then Rancher/K3S is a production ready flavour of Kubernetes.
+
+There is a simple nuts-and-bolts guide to setting up the fastapi app on Minikube in [k8s](k8s/README.md).

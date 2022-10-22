@@ -53,12 +53,12 @@ podman build -f Dockerfile-prod . -t fastapi-docker-kube-prod
 ```
 and the app can be run (in a container) using
 ```
-podman run -p 6780:6780 fastapi-docker-kube-prod:latest
+podman run -p 8080:6780 fastapi-docker-kube-prod:latest
 ```
 
 ### FastAPI docs ###
 
-Once the app is running, one can interact directly with the endpoints. As for all FastAPI apps, there are docs available on the endpoints
+Once the app is running, one can interact directly with the endpoints (which should be available at http://localhost:8080). As for all FastAPI apps, there are docs available on the endpoints
 *  /openapi.json
 *  /docs
 *  /redocvirtual
