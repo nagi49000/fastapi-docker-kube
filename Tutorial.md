@@ -34,12 +34,16 @@ The development chain described above can be used to host a service in productio
 
 Ideally, one would like a system that abstracts away the infrastructure worries, and only worries about serving images in containers; some kind of image-and-container orchestration. One might also like to have a picture of just pushing an image to that system, and the system perform the orchestration (similar to how one might push an image repository, and then the repository manages all the hosting).
 
-This is precisely the reasoning for introducing a 'Platform as a Service' (PaaS). It is a system where one can push images, and then the system handles many of the intricacies of orchestrating the serving of containers.
+This is precisely the reasoning for introducing a 'Platform as a Service' (PaaS). It is a system where one can push images, and then the system handles many of the intricacies of orchestrating the serving of containers. The system can be clustered over multiple virtual machines, meaning the developer pushing the image to PaaS does not need to worry about individual virtual machines; only about how to serve containers based on the image.
 
 ## Hosting on Kubernetes
 
-Kubernetes is the classic example of a PaaS, although other examples do exist (e.g. Docker Swarm). Many flavours of Kubernetes exist, which have been tailored by various vendors (although they all basically do the same thing).
+Kubernetes (K8S) is the classic example of a PaaS, although other examples do exist (e.g. Docker Swarm). Many flavours of Kubernetes exist, which have been tailored by various vendors (although they all basically do the same thing).
 
 The [Kubernetes docs](https://kubernetes.io/docs/home/) are pretty detailed and well polished. They cover a lot in a digestible manner, although do sweep a number of devils-int-the-detail under the rug.
 
 Kubernetes hides away many of the direct-docker and IaaS worries. On pushing an image to Kubernetes, one can tell Kubernetes what to do with that image by supplying various yamls that describe the infrastructure that Kubernetes should serve. These yamls are _declarative_ and not _imperative_. This means that (unlike the IaaS case), one can tell Kubernetes what one would like (or to be updated), and Kubernetes works out the steps to perform to make that happen.
+
+### Minikube
+
+Minikube is a flavour of Kubernetes well suited for tutorial purposes. It is a simple, single node, instance of kubernetes. Note, that is not production grade. If one wishes to look at single node simple instances of kubernetes, and manage that single node cluster in production, then Rancher/K3S is a production ready flavour of Kubernetes.
