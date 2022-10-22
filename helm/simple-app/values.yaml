@@ -8,16 +8,19 @@ image:
   repository: web
   tag: latest
 
+nameOverride: ""
+fullnameOverride: ""
+
 service:
   type: ClusterIP
   port: 8080
 
 ingress:
   enabled: true
-  prefixpath: /v1
+  prefixpath: "/v1"
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80

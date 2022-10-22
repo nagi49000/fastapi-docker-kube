@@ -23,6 +23,8 @@ spec:
           env:
             - name: ROOT_PATH
               value: {{ .Values.ingress.prefixpath }}
+            - name: APP_NAME
+              value: {{ include "simple-app.fullname" . }}
           ports:
             - containerPort: 6780
           resources: {}
