@@ -44,7 +44,7 @@ The [Kubernetes docs](https://kubernetes.io/docs/home/) are pretty detailed and 
 
 Kubernetes hides away many of the direct-docker and IaaS worries. On pushing an image to Kubernetes, one can tell Kubernetes what to do with that image by supplying various yaml files (called 'manifests') that describe the infrastructure that Kubernetes should serve. These manifests are _declarative_ and not _imperative_. This means that (unlike the IaaS case), one can tell Kubernetes what one would like (or to be updated), and Kubernetes works out the steps to perform to make that happen.
 
-### Minikube
+### Minikube and kubectl
 
 Minikube is a flavour of Kubernetes well suited for tutorial purposes. It is a simple, single node, instance of kubernetes. Note, that is not production grade. If one wishes to look at single node simple instances of kubernetes, and manage that single node cluster in production, then Rancher/K3S is a production ready flavour of Kubernetes.
 
@@ -72,3 +72,18 @@ Precisely how all the machinery in Kubernetes can be exposed as manifests is a m
 - In-pod networking between containers in the same pod is completely open.
 - Inter-pod networking is handled by a Kubernetes Service.
 - Networking out of the Kubernetes cluster is handled by an Ingress or Route attaching onto a Service.
+
+The standard way of communicating with a Kubernetes cluster is via command line using `kubectl`. Various flavours of Kubernetes have their own wrappers around kubectl (e.g. eksctl for AWS and oc for openshift).
+
+### Minikube and helm
+
+Using `kubectl` to deploy manifests can start to become cumbersome. There are issues with
+- multiple manifest files that are installed individually
+- tweaking manifest files for individual deployments
+- managing dependencies of manifests, where another deployment needs to be in place to support the requested deployment
+
+To this end, one can use helm, which is a 'package manager for Kubernetes'. This extends the IaC idea of manifest files by bundling into a package, so that (a) the package can be configured and (b) any dependencies can be listed in in the helm chart for install at `helm install` time.
+
+There is a simple nuts-and-bolts guide to a helm install of a fastapi app on Minikube in [helm](helm/README.md).
+
+Using helm becomes relatively simple once one realises that is is just a package manager for Kubernetes deployments. The onus then moves to understanding Kubernetes manifest files. Understanding how Kubernetes infrastructure is reflected (and can be configured) via manifests is not straightforward.
