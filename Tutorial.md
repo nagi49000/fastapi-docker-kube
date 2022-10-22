@@ -82,8 +82,8 @@ Using `kubectl` to deploy manifests can start to become cumbersome. There are is
 - tweaking manifest files for individual deployments
 - managing dependencies of manifests, where another deployment needs to be in place to support the requested deployment
 
-To this end, one can use helm, which is a 'package manager for Kubernetes'. This extends the IaC idea of manifest files by bundling into a package, so that (a) the package can be configured and (b) any dependencies can be listed in in the helm chart for install at `helm install` time.
+To this end, one can use helm, which is a 'package manager for Kubernetes'. This extends the IaC idea of manifest files by bundling into a package, so that (a) the package can be configured and (b) any dependencies can be listed in in the helm chart for install at `helm install` time. Just like software packages, helm charts can be stored in repositories, and repositories referenced (in the same way that apt or yum can reference repositories of software packages).
 
-There is a simple nuts-and-bolts guide to a helm install of a fastapi app on Minikube in [helm](helm/README.md).
+There is a simple nuts-and-bolts guide to a helm install of a fastapi app on Minikube in [helm](helm/README.md). The files within the [helm chart](helm/simple-app) are basically the individual manifest files bundled into a single folder, and made into templates (where template values can be inserted via jinja2).
 
 Using helm becomes relatively simple once one realises that is is just a package manager for Kubernetes deployments. The onus then moves to understanding Kubernetes manifest files. Understanding how Kubernetes infrastructure is reflected (and can be configured) via manifests is not straightforward.
