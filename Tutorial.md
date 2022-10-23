@@ -20,6 +20,7 @@ Podman (POD MANager) is an alternative to Docker. It improves on a number of asp
 - a daemon/service no longer needs to be running in the background
 - images and containers are encapsulated to the user, offering better security (e.g. as a user, running `podman images` will only show that user's images)
 - allow for multiple containers to be run in a single pod
+- natively run containers as rootless (docker introduces on-system security vulnerabilities for running containers)
 
 Docker images and Podman images are completeley compatible; so building an image via podman or docker, and then pushing to an image repository, should not introduce any docker/podman compatibility worries. Generally speaking, all docker commands can be run wth podman (by interchanging 'docker' on the command line for 'podman').
 
@@ -85,5 +86,7 @@ Using `kubectl` to deploy manifests can start to become cumbersome. There are is
 To this end, one can use helm, which is a 'package manager for Kubernetes'. This extends the IaC idea of manifest files by bundling into a package, so that (a) the package can be configured and (b) any dependencies can be listed in in the helm chart for install at `helm install` time. Just like software packages, helm charts can be stored in repositories, and repositories referenced (in the same way that apt or yum can reference repositories of software packages).
 
 There is a simple nuts-and-bolts guide to a helm install of a fastapi app on Minikube in [helm](helm/README.md). The files within the [helm chart](helm/simple-app) are basically the individual manifest files bundled into a single folder, and made into templates (where template values can be inserted via jinja2).
+
+As some background, the manifests used in [k8s](k8s/README.md) were copied into a new, blank helm chart. The new blank helm chart was created with `helm create new` on the command line, and all the template files specific to the generated new application (which happened to be an nginx application) were removed, and the manifest files from [k8s](k8s/README.md) copied into the 'templates' directory in the helm chart, and templatised.
 
 Using helm becomes relatively simple once one realises that is is just a package manager for Kubernetes deployments. The onus then moves to understanding Kubernetes manifest files. Understanding how Kubernetes infrastructure is reflected (and can be configured) via manifests is not straightforward.
