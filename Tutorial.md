@@ -31,7 +31,7 @@ The development chain described above can be used to host a service in productio
 - the scope, number of containers, and resource of the services are limited by the created infrastructure
 - any kind of scaling has to be done 'by hand'
 - failure of virtual machines must be handled directly
-- any kind of upgrades can result in services being temporarily down whilst containers are spund down and spun up
+- any kind of upgrades can result in services being temporarily unavailable whilst containers are spun down and spun up
 
 Ideally, one would like a system that abstracts away the infrastructure worries, and only worries about serving images in containers; some kind of image-and-container orchestration. One might also like to have a picture of just pushing an image to that system, and the system perform the orchestration (similar to how one might push an image repository, and then the repository manages all the hosting).
 
