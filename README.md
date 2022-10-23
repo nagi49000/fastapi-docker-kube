@@ -8,10 +8,10 @@ Specific installations will depend on your environment, and will also depend on 
 ### Docker installation ###
 
 Docker is in the apt repos for Ubuntu 20.04
-
 ```
 sudo apt install docker.io
 ```
+For older Ubuntu or Debian releases, one can always add the relevant repos as described [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04)
 
 ### Podman installation ###
 
