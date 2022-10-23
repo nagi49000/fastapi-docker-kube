@@ -12,7 +12,7 @@ The app is in Python. One can create a sandbox/environment by using a conda envi
 
 ### Docker
 
-Docker can be used for containerization; building a portable image from which one can run the app. This can be done directly from the dockerfiles, or orchestrated using the docker-compose file.
+Docker can be used for containerization; building a portable image from which one can run the app. This can be done directly from the dockerfiles, or orchestrated using the docker-compose file. Examples are available [here](services/README.md#docker)
 
 ### Podman
 
