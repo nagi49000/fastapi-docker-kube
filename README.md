@@ -5,6 +5,10 @@ A repo for exploring a simple app, and the deployment stages from pure docker or
 
 Specific installations will depend on your environment, and will also depend on the kubernetes flavour you wish to work with. The instructions below are for an Ubuntu 20.04 box.
 
+### Conda installation ###
+
+For running conda and Python code directly on your box (as opposed to in containers), conda can be installed from [here](https://docs.conda.io/en/latest/miniconda.html). The latest conda release and Python version for your system will suffice; when making a conda environment, one can specify a different Python version to that in the base conda environment.
+
 ### Docker installation ###
 
 Docker is in the apt repos for Ubuntu 20.04
